@@ -1,0 +1,16 @@
+#ifndef GOFISH_H
+#define GOFISH_H
+
+#include "deck.h"
+#include "player.h"
+
+/*
+   Define any prototype functions
+   for gofish.h here.
+*/
+
+void card_matches(char rank);
+
+void print_matching_rank(struct player* target, char rank);
+
+#endif

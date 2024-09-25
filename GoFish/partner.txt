@@ -1,0 +1,29 @@
+Partners:
+Nate Robinson
+Sam Chicoine
+
+Functions by Nate:
+-all of gofish.c
+
+In deck.c:
+-next_card
+
+In player.c:
+-game_over
+-reset_player
+-computer_play
+-user_play
+
+
+Functions by Sam:
+
+In deck.c:
+-shuffle
+-deal_player_cards
+
+In player.c:
+-add_card
+-remove_card
+-check_add_book
+-search
+-transfer_cards

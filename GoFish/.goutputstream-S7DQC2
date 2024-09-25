@@ -1,0 +1,73 @@
+#include <stdio.h>
+
+#include "gofish.h"
+
+
+//Remember deck_istance, user, computer declared in header/other c files so they are global variables.
+//Should not need to adjust #includes
+//I do not believe we will need to make anything in gofish.h atm its just linking stuff
+
+//Remember to make, then ./gofish make will often tell you where errors are I didnt really find a need to the debugger app but you can run gdb ./gofish after make to enter it.
+
+//All functions not in TO DO should be working as intended so notify me if you think something is wrong.
+
+//Hand is the linked list each hand contains ones card called top each player has a pointer card_list to the first hand struct.
+
+//#1 ISSUE !!! keeping track of what is an address and what a value 99% of problems are because of & -> and .
+
+//&(item) - gets address of item useful when handing something to a function
+
+//uno->dos - same as (*uno).dos  so treats uno as an address gets value at that address and then a value dos within that
+//(dos could be address or object this affects what notation comes after, another -> or a .)
+
+//. - similar to python object.attribute but wont work if its a pointer.attribute need the object at pointer.
+
+//I removed most my code in main as it was just testing functions, main is just going to handle looping the gameplay and turns.
+
+int main(int args, char* argv[]) {
+
+	int turn = 0; //Boolean to track who's trun it is, 0 for user, 1 for computer
+	
+	shuffle();
+	
+	deal_player_cards(&user);
+	deal_player_cards(&computer);
+	//Start game
+	while(1){
+		// Print all starting information
+		printf("Player 1's Hand - ");
+		struct hand* iterator = user.card_list;
+		while (iterator != NULL){
+			printf("%c%c ",iterator->top.suit,iterator->top.rank);
+			iterator=iterator->next;
+		}
+		printf("\n");
+		printf("Player 1's Book - ");
+		for (int i=0; i<7; i++){
+			printf("%c ",user.book[i]);
+		}
+		printf("\n");
+		printf("Player 2's Book - ");
+		for (int i=0; i<7; i++){
+			printf("%c ",computer.book[i]);
+		}
+		printf("\n");
+	
+		//Gameplay
+		if (turn == 0){
+			printf("Player 1's Turn, enter a Rank: ");
+			char input = user_play(&user);
+			if (search(&computer, input) != 1){	//Gofish condition
+				printf("\t- Player 2 has no %c's\n",input);
+				struct card* new_card = next_card();
+				//printf("New card is: %c%c",new_card->suit,new_card->rank);
+				add_card(&user, &new_card);
+				printf("we got to add_card");
+				printf("\t- Go Fish, Player 1 draws %c%c\n",new_card->suit,new_card->rank);
+			}else{
+				printf("good guess bruh\n");
+			}
+		}
+	}
+	
+}

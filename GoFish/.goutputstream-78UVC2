@@ -1,0 +1,37 @@
+#include <stdio.h>
+
+#include "gofish.h"
+
+/*
+Remember deck_istance, user, computer declared in header/other c files so they are global variables.
+Should not need to adjust #includes
+I do not believe we will need to make anything in gofish.h atm its just linking stuff
+
+Remember to make, then ./gofish make will often tell you where errors are I didnt really find a need to the debugger app but you can run gdb ./gofish after make to enter it.
+
+All functions not in TO DO should be working as intended so notify me if you think something is wrong.
+
+Hand is the linked list each hand contains ones card called top each player has a pointer card_list to the first hand struct.
+
+#1 ISSUE !!! keeping track of what is an address and what a value 99% of problems are because of & -> and .
+
+&(item) - gets address of item useful when handing something to a function
+
+uno->dos - same as (*uno).dos  so treats uno as an address gets value at that address and then a value dos within that
+(dos could be address or object this affects what notation comes after, another -> or a .)
+
+. - similar to python object.attribute but wont work if its a pointer.attribute need the object at pointer.
+
+I removed most my code in main as it was just testing functions, main is just going to handle looping the gameplay and turns.
+*/
+
+int main(int args, char* argv[]) {
+	
+	//This is all just calling function to test them i had loops to print out hand card values before and after but can start main from scratch
+	shuffle();
+	
+	deal_player_cards(&user);
+	deal_player_cards(&computer);
+	
+	printf(computer_play(&user));
+}
